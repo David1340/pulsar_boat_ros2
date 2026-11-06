@@ -9,6 +9,20 @@ import os
 
 def generate_launch_description():
 
+    # Get package directory
+    pulsar_boat_dir = get_package_share_directory('pulsar_boat')
+
+    # Include boat visualization
+    visualization_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                pulsar_boat_dir,
+                'launch',
+                'boat_visualization.launch.py'
+            )
+        )
+    )
+
     mavros_node = Node(
         package='mavros',
         executable='mavros_node',
@@ -32,6 +46,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        visualization_launch,
         mavros_node,
         livox_launch,
     ])
