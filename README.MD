@@ -23,6 +23,7 @@ The following software is required:
 - ROS 2 Humble
 - Livox SDK2
 - Livox ROS Driver 2
+- MAVROS
 
 ### 2.1 ROS 2 Humble
 
@@ -41,6 +42,16 @@ https://github.com/Livox-SDK/Livox-SDK2
 Follow the official installation instructions:
 
 https://github.com/Livox-SDK/livox_ros_driver2
+
+### 2.4 MAVROS
+
+source /opt/ros/humble/setup.bash
+
+sudo apt update
+
+sudo apt install ros-humble-mavros
+
+sudo ros2 run mavros install_geographiclib_datasets.sh
 
 ## 3. Workspace Setup
 
