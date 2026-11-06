@@ -2,23 +2,62 @@
 <?xml version="1.0"?>
 <robot name="pulsar_boat">
 
+  <!-- Main boat body -->
   <link name="base_link">
-
-  <visual>
+    <visual>
       <origin xyz="-0.39607 -0.75451 -0.24546"
               rpy="0 0 0"/>
 
       <geometry>
-          <mesh
-              filename="package://pulsar_boat/meshes/pulsar_boat.STL"
-              scale="0.001 0.001 0.001"/>
+        <mesh
+          filename="package://pulsar_boat/meshes/pulsar_boat.STL"
+          scale="0.001 0.001 0.001"/>
       </geometry>
 
       <material name="boat_color">
-          <color rgba="0.3 0.4 0.5 1.0"/>
+        <color rgba="0.3 0.4 0.5 1.0"/>
       </material>
-  </visual>
-
+    </visual>
   </link>
+
+  <!-- Vertical LiDAR mounting mast -->
+  <link name="lidar_mast_link">
+    <visual>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.50"/>
+      </geometry>
+      <material name="mast_material">
+        <color rgba="0.25 0.25 0.28 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Livox MID-360 sensor -->
+  <link name="livox_frame">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.045" length="0.06"/>
+      </geometry>
+      <material name="livox_material">
+        <color rgba="0.15 0.35 0.85 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Attach the mast to the front of the boat -->
+  <joint name="base_to_lidar_mast" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_mast_link"/>
+    <origin xyz="0 -0.1 0.175" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Attach the Livox sensor to the top of the mast -->
+  <joint name="mast_to_livox" type="fixed">
+    <parent link="lidar_mast_link"/>
+    <child link="livox_frame"/>
+    <origin xyz="0 0 0.50" rpy="0 0 0"/>
+  </joint>
 
 </robot>
