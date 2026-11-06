@@ -200,30 +200,3 @@ Generate the TF tree:
 ```bash
 ros2 run tf2_tools view_frames
 ```
-
----
-
-## 9. Troubleshooting
-
-### Package not found
-
-Make sure the ROS 2 and workspace setup files have been sourced:
-
-```bash
-source /opt/ros/humble/setup.bash
-source ~/pulsar_boat_ws/install/setup.bash
-```
-
-### Livox driver initialization failure
-
-Check the network configuration, the host IP address in the MID-360 configuration file, and whether another Livox driver instance is already running.
-
-### Changes to the URDF or launch files are not reflected
-
-Rebuild the package and source the workspace again:
-
-```bash
-cd ~/pulsar_boat_ws
-colcon build --packages-select pulsar_boat
-source install/setup.bash
-```
